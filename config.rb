@@ -13,6 +13,8 @@ activate :directory_indexes
 
 ignore(/.*\.rb/)
 
+set :build_dir, 'tmp'
+
 configure :build do
   activate :minify_css
   activate :minify_javascript
