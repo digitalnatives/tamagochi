@@ -8,7 +8,8 @@ GIT
 
 GIT
   remote: git://github.com/gdotdesign/quality-control.git
-  revision: 9286f367390b93663039b46da3633b7f1f0554da
+  revision: ee76764e866e378e3a05791f659a2733a9ed5330
+  ref: ee76764e866e378e3a05791f659a2733a9ed5330
   specs:
     quality_control (0.1.2)
       colorize (~> 0.7.3)
