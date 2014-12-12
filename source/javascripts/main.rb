@@ -222,7 +222,7 @@ end
 # Main
 class Main < Fron::Component
   component :neko, Neko
-  component :health, 'div'
+  component :health, 'div', class: 'neko-health-good'
 
   Neko::STATES.each do |_, state|
     component :key, "button[action=#{state[:method]}] #{state[:method]}"
@@ -240,7 +240,12 @@ class Main < Fron::Component
 
   # Renders the component
   def render
-    @health.text = @neko.health
+    @health['class'] = case @neko.health
+                       when 1..20 then 'neko-health-terrible'
+                       when 21..70 then 'neko-health-ok'
+                       else 'neko-health-perfect'
+                       end
+    @health.text = '♥'
   end
 
   # Initializes the component
