@@ -1,4 +1,5 @@
 require 'fron'
+require 'lib/desktop_notifications'
 
 # Kernel
 module Kernel
@@ -65,28 +66,28 @@ class Neko < Fron::Component
     hungry: {
       method: :eat,
       probability: 0.1,
-      duration: 10,
+      duration: 100,
       fail_score: 10,
       success_score: 5
     },
     sleep: {
       method: :wakeup,
       probability: 0.2,
-      duration: 10,
+      duration: 100,
       fail_score: 0,
       success_score: 0
     },
     playful: {
       method: :play,
       probability: 0.5,
-      duration: 10,
+      duration: 100,
       fail_score: 4,
       success_score: 10
     },
     sick: {
       method: :heal,
       probability: 0.3,
-      duration: 10,
+      duration: 100,
       fail_score: 10,
       success_score: 0
     },
@@ -166,7 +167,19 @@ class Neko < Fron::Component
     self[:action] = state
     @health = @health.clamp(0, 100)
     trigger 'change'
+    send_status_notification unless dead?
     save
+  end
+
+  # Sends status desktop notifications
+  def send_status_notification
+    message = case @state
+              when :hungry then "I'm hungry!!!"
+              when :sick then "I'm not feeling so well... :("
+              when :playful then 'Come play with me!'
+              end
+
+    DesktopNotifications.notify(message) unless message.nil?
   end
 
   # Successfull resolve
@@ -244,6 +257,7 @@ class Main < Fron::Component
   def render
     @health.toggleClass 'hidden', @neko.health == 0
     @health['class'] = case @neko.health
+                       when 0 then 'neko-health-dead'
                        when 1..20 then 'neko-health-terrible'
                        when 21..70 then 'neko-health-ok'
                        else 'neko-health-perfect'
