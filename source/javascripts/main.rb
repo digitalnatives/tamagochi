@@ -165,7 +165,7 @@ class Neko < Fron::Component
     self[:action] = state
     @health = @health.clamp(0, 100)
     trigger 'change'
-    send_status_notification
+    send_status_notification unless dead?
     save
   end
 
@@ -254,6 +254,7 @@ class Main < Fron::Component
   # Renders the component
   def render
     @health['class'] = case @neko.health
+                       when 0 then 'neko-health-dead'
                        when 1..20 then 'neko-health-terrible'
                        when 21..70 then 'neko-health-ok'
                        else 'neko-health-perfect'
