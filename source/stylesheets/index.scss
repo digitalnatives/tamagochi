@@ -2,10 +2,13 @@ neko {
   display: inline-block;
   width: 32px;
   height: 32px;
-  -webkit-animation: neko-itch 1s infinite steps(1);
+  animation: 1s infinite steps(1);
+  &[action=itch] {
+    animation-name: neko-itch
+  }
 }
 
-@-webkit-keyframes neko-itch {
+@keyframes neko-itch {
   0% {
     background: image-url('itch1.gif');
   }
