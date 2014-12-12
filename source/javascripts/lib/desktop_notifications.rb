@@ -4,7 +4,7 @@ module DesktopNotifications
   # @param message [String] The message
   def self.notify(message)
     update do
-      `new Notification('Your little friend', { body: #{message} })`
+      `new Notification('Your little friend', { body: #{message}, icon: 'http://webneko.net/white/still.gif' })`
     end
   end
 

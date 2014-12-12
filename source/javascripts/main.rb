@@ -66,28 +66,28 @@ class Neko < Fron::Component
     hungry: {
       method: :eat,
       probability: 0.1,
-      duration: 10,
+      duration: 100,
       fail_score: 10,
       success_score: 5
     },
     sleep: {
       method: :wakeup,
       probability: 0.2,
-      duration: 10,
+      duration: 100,
       fail_score: 0,
       success_score: 0
     },
     playful: {
       method: :play,
       probability: 0.5,
-      duration: 10,
+      duration: 100,
       fail_score: 4,
       success_score: 10
     },
     sick: {
       method: :heal,
       probability: 0.3,
-      duration: 10,
+      duration: 100,
       fail_score: 10,
       success_score: 0
     },
