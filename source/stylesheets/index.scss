@@ -175,6 +175,15 @@ main {
     }
   }
 
+  span {
+    position: absolute;
+    top: 0;
+    font-weight: bold;
+    font-family: sans;
+    cursor: pointer;
+    right: 0;
+  }
+
   button {
     width: 30px;
     height: 30px;

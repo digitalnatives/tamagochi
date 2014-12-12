@@ -4,6 +4,7 @@
   "manifest_version": 2,
   "version": "0.1.0",
   "icons": {
+    "32x32": "icon.gif"
   },
   "offline_enabled": true,
   "app": {
@@ -11,5 +12,5 @@
       "scripts": ["background.js"]
     }
   },
-  "permissions": ["storage"]
+  "permissions": ["storage", "notifications"]
 }

@@ -297,6 +297,7 @@ end
 class Main < Fron::Component
   component :neko, Neko
   component :health, 'div', class: 'neko-health-good'
+  component :hide, 'span x'
 
   Neko::STATES.each do |_, state|
     component :key, "button[action=#{state[:method]}] #{state[:method]}"
@@ -304,6 +305,11 @@ class Main < Fron::Component
 
   on :click, :button, :action
   on :change, :render
+  on :click, :span, :hide
+
+  def hide
+    `chrome.app.window.get('fileWin').hide()`
+  end
 
   # Sends an action to neko
   #

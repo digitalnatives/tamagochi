@@ -25,4 +25,5 @@ end
 after_build  do
   `cp app/manifest.json tmp`
   `cp app/background.js tmp`
+  `cp app/icon.gif tmp`
 end

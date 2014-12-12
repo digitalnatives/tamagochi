@@ -4,7 +4,12 @@ module DesktopNotifications
   # @param message [String] The message
   def self.notify(message)
     update do
-      `new Notification('Your little friend', { body: #{message}, icon: 'http://webneko.net/white/still.gif' })`
+      %x{
+        noty = new Notification('Your little friend', { body: #{message}, icon: 'http://webneko.net/white/still.gif' })
+        noty.onclick = function () {
+          chrome.app.window.get('fileWin').show()
+        }
+      }
     end
   end
 
@@ -14,7 +19,7 @@ module DesktopNotifications
   def self.update
     return yield if `#{native}.permission` == 'granted'
     `#{native}.requestPermission(function(){
-      if(#{native}.permission == 'granted') {
+      if(#{native}.permission == 'granted'){
         #{yield}
       }
     })`
