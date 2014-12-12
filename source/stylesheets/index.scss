@@ -1,3 +1,4 @@
+$neko-names: blue valentine;
 $neko-anims: itch sleep erun wrun sscratch;
 
 // hungry
@@ -12,55 +13,60 @@ neko {
   height: 32px;
   animation: 0.4s infinite steps(1);
 
-  &[action=hungry] {
-    animation-name: 'neko-hungry';
-  }
+  @each $neko-name in $neko-names {
+    &[action=hungry][name=#{$neko-name}] {
+      animation-name: 'neko-#{$neko-name}-hungry';
+    }
 
-  &[action=still] {
-    animation-name: 'neko-still';
-  }
+    &[action=still][name=#{$neko-name}] {
+      animation-name: 'neko-#{$neko-name}-still';
+    }
 
-  @each $anim in $neko-anims {
-    &[action=#{$anim}] {
-      animation-name: 'neko-#{$anim}';
+    @each $anim in $neko-anims {
+      &[action=#{$anim}][name=#{$neko-name}] {
+        animation-name: 'neko-#{$neko-name}-#{$anim}';
+      }
     }
   }
 }
 
-@each $anim in $neko-anims {
-  @keyframes neko-#{$anim} {
+
+@each $neko-name in $neko-names {
+  @each $anim in $neko-anims {
+    @keyframes neko-#{$neko-name}-#{$anim} {
+      0% {
+        background: image-url('#{$neko-name}/#{$anim}1.gif');
+      }
+      50% {
+        background: image-url('#{$neko-name}/#{$anim}2.gif');
+      }
+      100% {
+        background: image-url('#{$neko-name}/#{$anim}1.gif');
+      }
+    }
+  }
+
+  @keyframes neko-#{$neko-name}-hungry {
     0% {
-      background: image-url('#{$anim}1.gif');
+      background: image-url('#{$neko-name}/alert.gif');
     }
     50% {
-      background: image-url('#{$anim}2.gif');
+      background: image-url('#{$neko-name}/yawn.gif');
     }
     100% {
-      background: image-url('#{$anim}1.gif');
+      background: image-url('#{$neko-name}/still.gif');
     }
   }
-}
 
-@keyframes neko-hungry {
-  0% {
-    background: image-url('alert.gif');
-  }
-  50% {
-    background: image-url('yawn.gif');
-  }
-  100% {
-    background: image-url('still.gif');
-  }
-}
-
-@keyframes neko-still {
-  0% {
-    background: image-url('still.gif');
-  }
-  50% {
-    background: image-url('still.gif');
-  }
-  100% {
-    background: image-url('still.gif');
+  @keyframes neko-#{$neko-name}-still {
+    0% {
+      background: image-url('#{$neko-name}/still.gif');
+    }
+    50% {
+      background: image-url('#{$neko-name}/still.gif');
+    }
+    100% {
+      background: image-url('#{$neko-name}/still.gif');
+    }
   }
 }
