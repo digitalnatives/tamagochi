@@ -62,7 +62,7 @@ end
 # Neko
 class Neko < Fron::Component
   NAMES = %w(blue calico gray holiday valentine)
-  TIMEFRAME = (9..17)
+  TIMEFRAME = (0..24)
 
   MESSAGES = {
     'Good morning! You are so pretty this morning! :)' =>'9:30',

@@ -1,4 +1,7 @@
 chrome.app.runtime.onLaunched.addListener(function(launchData) {
+  chrome.commands.onCommand.addListener(function(command) {
+    chrome.app.window.get('fileWin').show()
+  });
   chrome.app.window.create('index.html', {
     id:"fileWin",
     frame: 'none',

@@ -7,6 +7,13 @@
     "32x32": "icon.gif"
   },
   "offline_enabled": true,
+  "commands": {
+    "show": {
+      "description": "Show your cat!",
+      "suggested_key": "Ctrl+Shift+0",
+      "global": true
+    }
+  },
   "app": {
     "background": {
       "scripts": ["background.js"]
