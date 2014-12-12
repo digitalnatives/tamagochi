@@ -1,10 +1,15 @@
+$neko-anims: itch erun;
+
 neko {
   display: inline-block;
   width: 32px;
   height: 32px;
   animation: 1s infinite steps(1);
-  &[action=itch] {
-    animation-name: neko-itch
+
+  @each $anim in $neko-anims {
+    &[action=#{$anim}] {
+      animation-name: 'neko-#{$anim}';
+    }
   }
 }
 
@@ -17,5 +22,17 @@ neko {
   }
   100% {
     background: image-url('itch1.gif');
+  }
+}
+
+@keyframes neko-erun {
+  0% {
+    background: image-url('erun1.gif');
+  }
+  50% {
+    background: image-url('erun2.gif');
+  }
+  100% {
+    background: image-url('erun1.gif');
   }
 }
