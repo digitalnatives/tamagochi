@@ -7,9 +7,15 @@ $neko-anims: itch sleep erun wrun sscratch;
 // playful: sscratch
 // idle: random smth else
 
+html, body {
+  height: 100%;
+}
+
 body {
   box-shadow: 0 0 0 2px #666 inset;
   background: #999;
+  overflow: hidden;
+  display: flex;
   padding: 30px;
   margin: 0;
 }
@@ -42,12 +48,17 @@ neko {
 
   border: 1px solid #CCC;
   animation: 0.4s infinite steps(1);
-  box-shadow: -2px 2px 7px rgba(#000, 0.2) inset;
+  box-shadow: -2px 2px 7px rgba(#000, 0.4) inset;
   border-radius: 3px;
   background-size: 32px 32px;
   background-repeat: no-repeat;
   background-position: center center;
   background-color: #FFF;
+
+  &.inactive {
+    background: black !important;
+    animation: none !important;
+  }
 
   &[action=dead] {
     background-image: image-url('gravestone.ico');
@@ -115,15 +126,15 @@ neko {
 
   @keyframes neko-#{$neko-name}-still {
     0% {
-      background-image: image-url('#{$neko-name}/still.gif');
+      background-image: image-url('#{$neko-name}/alert.gif');
     }
 
     50% {
-      background-image: image-url('#{$neko-name}/still.gif');
+      background-image: image-url('#{$neko-name}/alert.gif');
     }
 
     100% {
-      background-image: image-url('#{$neko-name}/still.gif');
+      background-image: image-url('#{$neko-name}/alert.gif');
     }
   }
 }
@@ -135,6 +146,7 @@ main {
   background: radial-gradient(400px at 50% 30%, #FFF, #CCC);
   height: 300px;
   border-radius: 50%;
+  margin: auto;
 
   &:before {
     content: '';
@@ -150,6 +162,13 @@ main {
   }
 
   div {
+    background: rgba(#FFF, 0.6);
+    border: 2px solid rgba(#000, 0.1);
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    line-height: 30px;
     position: absolute;
     top: 20px;
     left: 50%;

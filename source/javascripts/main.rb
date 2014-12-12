@@ -1,4 +1,5 @@
 require 'fron'
+require 'date'
 require 'lib/desktop_notifications'
 
 # Kernel
@@ -61,11 +62,12 @@ end
 # Neko
 class Neko < Fron::Component
   NAMES = %w(blue calico gray holiday valentine)
+  TIMEFRAME = (9..17)
 
   STATES = {
     hungry: {
       method: :eat,
-      probability: 0.1,
+      probability: 0.005,
       duration: 100,
       fail_score: 10,
       success_score: 5
@@ -112,7 +114,7 @@ class Neko < Fron::Component
   def initialize
     super
     load do |data|
-      unless data
+      if !data || (data[:state] == 'dead' && data[:last_monday_alive] != monday.to_s)
         reset
         break
       end
@@ -121,6 +123,7 @@ class Neko < Fron::Component
       @health = data[:health]
       set_state data[:state]
       trigger 'change'
+      tick
     end
   end
 
@@ -130,12 +133,25 @@ class Neko < Fron::Component
     idle
   end
 
+  def monday(date = Date.today)
+    today = date
+    day = today.wday
+    diff = case day
+           when 0
+             6
+           when 1..6
+             day - 1
+           end
+    today - diff
+  end
+
   def save
     Platform.set 'data',
       state: @state,
       health: @health,
       name: self[:name],
-      start_time: @start_time
+      start_time: @start_time,
+      last_monday_alive: monday.to_s
   end
 
   def load
@@ -146,14 +162,15 @@ class Neko < Fron::Component
 
   # Runs on every tick
   def tick
-    return if dead?
+    toggleClass 'inactive', !TIMEFRAME.cover?(Time.now.hour)
+    return if dead? || !TIMEFRAME.cover?(Time.now.hour)
     state, _ = next_state
 
     if idle? && state
       @start_time = Time.now.to_i
       set_state state
       puts "Next state: #{state}"
-    else
+    elsif @start_time
       diff = Time.now.to_i - @start_time.to_i
       end_state if diff.to_i > STATES[@state][:duration].to_i
     end
@@ -191,7 +208,7 @@ class Neko < Fron::Component
 
   # Fail to resolve
   def end_state
-    @health -= STATES[@state][:fail_score]
+    @health -= STATES[@state][:fail_score].to_i
     @health > 0 ? idle : die
     puts "Failed to resolve! Health is now #{@health}!"
   end
