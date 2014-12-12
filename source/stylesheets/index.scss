@@ -132,12 +132,29 @@ main {
   height: 300px;
   border-radius: 50%;
 
+  &:before {
+    content: '';
+    background: desaturate(lightgreen, 50%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: 0 -10px 30px rgba(#000, 0.4) inset;
+    clip: rect(0px, 250px, 185px, 0px);
+    border-radius: inherit;
+  }
+
   div {
     position: absolute;
-    top: 180px;
+    top: 20px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 25px;
+
+    &.hidden {
+      display: none;
+    }
   }
 
   button {
@@ -147,38 +164,49 @@ main {
     border-radius: 50%;
     border: none;
     position: absolute;
-    background: radial-gradient(20px at 50% 30%, #FFF, #CCC);
-    box-shadow: 0 3px 10px rgba(#000, 0.5);
+    box-shadow: 0 0 5px rgba(#000, 0.5) inset, 0 0 6px rgba(#000, 0.3);
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+    background-position: 4px 5px;
+    cursor: pointer;
 
-    &:first-letter {
-      text-transform: uppercase;
-      font-weight: bold;
-      font-size: 10px;
+    &:focus {
+      outline: none;
     }
 
     &:nth-of-type(1) {
-      bottom: 90px;
-      left: 40px;
+      background-image: image-url('icons/feed.svg');
+      background-color: #FF8A84;
+      bottom: 70px;
+      left: 60px;
     }
 
     &:nth-of-type(2) {
-      bottom: 60px;
-      left: 70px;
+      background-image: image-url('icons/wake-up.svg');
+      background-color: #CBE8BA;
+      bottom: 70px;
+      left: 110px;
     }
 
     &:nth-of-type(3) {
-      bottom: 45px;
-      right: 110px;
+      background-image: image-url('icons/pet.svg');
+      background-color: #FEFAC0;
+      bottom: 30px;
+      right: 85px;
     }
 
     &:nth-of-type(4) {
-      bottom: 60px;
-      right: 70px;
+      background-image: image-url('icons/heal.svg');
+      background-color: #F6A2BF;
+      bottom: 30px;
+      left: 85px;
     }
 
     &:nth-of-type(5) {
-      bottom: 90px;
-      right: 40px;
+      background-image: image-url('icons/play.svg');
+      background-color: #91E4FB;
+      bottom: 70px;
+      right: 60px;
     }
   }
 }

@@ -95,14 +95,16 @@ class Neko < Fron::Component
     }
   }
 
-  attr_reader :health
-
   # Define states for methods
   STATES.each do |key, state|
     define_method state[:method] do
       return unless @state == key
       resolve_state
     end
+  end
+
+  def health
+    @health.to_i
   end
 
   # Initializes the neko
@@ -152,7 +154,7 @@ class Neko < Fron::Component
       puts "Next state: #{state}"
     else
       diff = Time.now.to_i - @start_time.to_i
-      end_state if diff > STATES[@state][:duration]
+      end_state if diff.to_i > STATES[@state][:duration].to_i
     end
   end
 
@@ -240,6 +242,7 @@ class Main < Fron::Component
 
   # Renders the component
   def render
+    @health.toggleClass 'hidden', @neko.health == 0
     @health['class'] = case @neko.health
                        when 1..20 then 'neko-health-terrible'
                        when 21..70 then 'neko-health-ok'
