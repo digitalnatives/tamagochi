@@ -21,3 +21,8 @@ configure :build do
   activate :minify_html
   activate :asset_hash
 end
+
+after_build  do
+  `cp app/manifest.json tmp`
+  `cp app/background.js tmp`
+end
