@@ -1,18 +1,18 @@
-html,
-body {
-  height: 100%;
-  margin: 0;
+neko {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  -webkit-animation: neko-itch 1s infinite steps(1);
 }
 
-body {
-  background-image: radial-gradient(#EEE, #DDD);
-
-  display: flex;
-  font-family: sans;
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-  font-size: 40px;
-  color: #333;
+@-webkit-keyframes neko-itch {
+  0% {
+    background: image-url('itch1.gif');
+  }
+  50% {
+    background: image-url('itch2.gif');
+  }
+  100% {
+    background: image-url('itch1.gif');
+  }
 }
