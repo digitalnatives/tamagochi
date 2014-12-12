@@ -16,8 +16,16 @@ neko {
     animation-name: 'neko-hungry';
   }
 
-  &[action=still] {
+  &[action=idle] {
     animation-name: 'neko-still';
+  }
+
+  &[action=itch] {
+    animation-name: 'neko-still';
+  }
+
+  &[action=playful] {
+    animation-name: 'neko-sscratch';
   }
 
   @each $anim in $neko-anims {
