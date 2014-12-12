@@ -151,7 +151,7 @@ class Neko < Fron::Component
       set_state state
       puts "Next state: #{state}"
     else
-      diff = Time.now.to_i - @start_time
+      diff = Time.now.to_i - @start_time.to_i
       end_state if diff > STATES[@state][:duration]
     end
   end
