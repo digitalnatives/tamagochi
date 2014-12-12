@@ -14,6 +14,7 @@ end
 
 # Neko
 class Neko < Fron::Component
+  tag 'neko[name=calico]'
   STATES = {
     hungry: {
       method: :eat,
@@ -38,7 +39,7 @@ class Neko < Fron::Component
     },
     sick: {
       method: :heal,
-      probability: 0.05,
+      probability: 0.3,
       duration: 10,
       fail_score: 10,
       success_score: 0
@@ -109,9 +110,9 @@ class Neko < Fron::Component
   # @param random [Float] The random number
   #
   # @return [Array] The state as an array [key, data]
-  def next_state(random = rand)
+  def next_state
     STATES.find do |_, state|
-      state[:probability] && state[:probability] > random
+      state[:probability] && state[:probability] > rand
     end
   end
 
