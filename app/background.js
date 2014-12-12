@@ -3,7 +3,7 @@ chrome.app.runtime.onLaunched.addListener(function(launchData) {
     id:"fileWin",
     frame: 'none',
     maxWidth: 310,
-    maxHeight: 370,
+    maxHeight: 360,
     singleton: true
     }, function(win) {
       win.width
