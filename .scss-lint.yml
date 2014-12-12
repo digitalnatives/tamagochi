@@ -2,6 +2,9 @@ linters:
   SingleLinePerSelector:
     enabled: false
 
+  ColorKeyword:
+    enabled: false
+
   PropertySortOrder:
     enabled: false
 

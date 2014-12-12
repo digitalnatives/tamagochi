@@ -48,9 +48,11 @@ neko {
       0% {
         background: image-url('#{$neko-name}/#{$anim}1.gif');
       }
+
       50% {
         background: image-url('#{$neko-name}/#{$anim}2.gif');
       }
+
       100% {
         background: image-url('#{$neko-name}/#{$anim}1.gif');
       }
@@ -61,9 +63,11 @@ neko {
     0% {
       background: image-url('#{$neko-name}/alert.gif');
     }
+
     50% {
       background: image-url('#{$neko-name}/yawn.gif');
     }
+
     100% {
       background: image-url('#{$neko-name}/still.gif');
     }
@@ -73,9 +77,11 @@ neko {
     0% {
       background: image-url('#{$neko-name}/still.gif');
     }
+
     50% {
       background: image-url('#{$neko-name}/still.gif');
     }
+
     100% {
       background: image-url('#{$neko-name}/still.gif');
     }
