@@ -1,4 +1,5 @@
 require 'fron'
+require 'lib/desktop_notifications'
 
 # Kernel
 module Kernel
@@ -164,7 +165,19 @@ class Neko < Fron::Component
     self[:action] = state
     @health = @health.clamp(0, 100)
     trigger 'change'
+    send_status_notification
     save
+  end
+
+  # Sends status desktop notifications
+  def send_status_notification
+    message = case @state
+              when :hungry then "I'm hungry!!!"
+              when :sick then "I'm not feeling so well... :("
+              when :playful then 'Come play with me!'
+              end
+
+    DesktopNotifications.notify(message) unless message.nil?
   end
 
   # Successfull resolve
