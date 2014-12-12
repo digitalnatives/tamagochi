@@ -23,6 +23,40 @@ class Numeric
   end
 end
 
+module Platform
+  def self.get(key, &block)
+    %x{
+      if(chrome.storage){
+        chrome.storage.local.get(#{key},function(data){
+          if(data[key]) {
+            value = Opal.JSON.$parse((data[#{key}]))
+            block.$call(value)
+          } else {
+            #{yield if block_given?}
+          }
+        })
+      } else {
+        #{yield Fron::Storage::LocalStorage.get(key)}
+      }
+    }
+  end
+
+  def self.set(key, value, &block)
+    %x{
+      if(chrome.storage){
+        obj = {}
+        obj[#{key}] = #{value.to_json}
+        chrome.storage.local.set(obj,function(){
+          #{yield if block_given?}
+        })
+      } else {
+        #{Fron::Storage::LocalStorage.set(key, value)};
+        #{yield if block_given?}
+      }
+    }
+  end
+end
+
 # Neko
 class Neko < Fron::Component
   NAMES = %w(blue calico gray holiday valentine)
@@ -74,9 +108,37 @@ class Neko < Fron::Component
   # Initializes the neko
   def initialize
     super
+    load do |data|
+      unless data
+        reset
+        break
+      end
+      self[:name] = data[:name]
+      @start_time = data[:start_time]
+      @health = data[:health]
+      set_state data[:state]
+      trigger 'change'
+    end
+  end
+
+  def reset
     self[:name] = NAMES.sample
     @health = 100
     idle
+  end
+
+  def save
+    Platform.set 'data',
+      state: @state,
+      health: @health,
+      name: self[:name],
+      start_time: @start_time
+  end
+
+  def load
+    Platform.get 'data' do |data|
+      yield data
+    end
   end
 
   # Runs on every tick
@@ -85,11 +147,11 @@ class Neko < Fron::Component
     state, _ = next_state
 
     if idle? && state
-      @start_time = Time.now
+      @start_time = Time.now.to_i
       set_state state
       puts "Next state: #{state}"
     else
-      diff = Time.now - @start_time
+      diff = Time.now.to_i - @start_time
       end_state if diff > STATES[@state][:duration]
     end
   end
@@ -102,6 +164,7 @@ class Neko < Fron::Component
     self[:action] = state
     @health = @health.clamp(0, 100)
     trigger 'change'
+    save
   end
 
   # Successfull resolve
@@ -189,6 +252,7 @@ class Main < Fron::Component
   def initialize
     super
     interval(1000) { @neko.tick }
+    render
   end
 end
 

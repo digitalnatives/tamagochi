@@ -8,6 +8,9 @@ $neko-anims: itch sleep erun wrun sscratch;
 // idle: random smth else
 
 body {
+  box-shadow: 0 0 0 2px #666 inset;
+  background: #999;
+  padding: 30px;
   margin: 0;
 }
 
@@ -24,6 +27,7 @@ body {
 }
 
 neko {
+  -webkit-app-region: drag;
   display: inline-block;
   width: 140px;
   height: 100px;
@@ -121,13 +125,11 @@ neko {
 }
 
 main {
-  -webkit-app-region: drag;
   position: relative;
   box-shadow: 0 -10px 30px rgba(#000, 0.4) inset, 0 10px 20px rgba(#000, 0.2);
   width: 250px;
   background: radial-gradient(400px at 50% 30%, #FFF, #CCC);
   height: 300px;
-  margin: 30px;
   border-radius: 50%;
 
   div {
