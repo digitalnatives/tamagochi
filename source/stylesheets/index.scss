@@ -7,15 +7,10 @@ $neko-anims: itch sleep erun wrun sscratch;
 // playful: sscratch
 // idle: random smth else
 
-html, body {
-  height: 100%;
-}
-
 body {
   box-shadow: 0 0 0 2px #666 inset;
   background: #999;
   overflow: hidden;
-  display: flex;
   padding: 30px;
   margin: 0;
 }

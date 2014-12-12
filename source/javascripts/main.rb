@@ -327,7 +327,7 @@ class Main < Fron::Component
   # Initializes the component
   def initialize
     super
-    interval(10000) { @neko.tick }
+    interval(1000) { @neko.tick }
     render
   end
 end
