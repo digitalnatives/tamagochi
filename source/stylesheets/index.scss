@@ -11,6 +11,18 @@ body {
   margin: 0;
 }
 
+.neko-health-perfect {
+  color: green;
+}
+
+.neko-health-ok {
+  color: orange;
+}
+
+.neko-health-terrible {
+  color: red;
+}
+
 neko {
   display: inline-block;
   width: 140px;
@@ -123,6 +135,7 @@ main {
     top: 180px;
     left: 50%;
     transform: translateX(-50%);
+    font-size: 25px;
   }
 
   button {
