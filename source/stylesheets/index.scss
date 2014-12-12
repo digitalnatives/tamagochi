@@ -13,6 +13,11 @@ neko {
   height: 32px;
   animation: 0.4s infinite steps(1);
 
+  &[action=dead] {
+    background-image: image-url('gravestone.ico');
+    background-size: cover;
+  }
+
   @each $neko-name in $neko-names {
     &[action=hungry][name=#{$neko-name}] {
       animation-name: 'neko-#{$neko-name}-hungry';
