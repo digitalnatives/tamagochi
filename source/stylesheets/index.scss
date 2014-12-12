@@ -9,13 +9,24 @@ $neko-anims: itch sleep erun wrun sscratch;
 
 neko {
   display: inline-block;
-  width: 32px;
-  height: 32px;
+  width: 140px;
+  height: 100px;
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  border: 1px solid #CCC;
   animation: 0.4s infinite steps(1);
+  box-shadow: -2px 2px 7px rgba(#000, 0.2) inset;
+  border-radius: 3px;
+  background-size: 32px 32px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: #FFF;
 
   &[action=dead] {
     background-image: image-url('gravestone.ico');
-    background-size: cover;
   }
 
   @each $neko-name in $neko-names {
@@ -51,44 +62,102 @@ neko {
   @each $anim in $neko-anims {
     @keyframes neko-#{$neko-name}-#{$anim} {
       0% {
-        background: image-url('#{$neko-name}/#{$anim}1.gif');
+        background-image: image-url('#{$neko-name}/#{$anim}1.gif');
       }
 
       50% {
-        background: image-url('#{$neko-name}/#{$anim}2.gif');
+        background-image: image-url('#{$neko-name}/#{$anim}2.gif');
       }
 
       100% {
-        background: image-url('#{$neko-name}/#{$anim}1.gif');
+        background-image: image-url('#{$neko-name}/#{$anim}1.gif');
       }
     }
   }
 
   @keyframes neko-#{$neko-name}-hungry {
     0% {
-      background: image-url('#{$neko-name}/alert.gif');
+      background-image: image-url('#{$neko-name}/alert.gif');
     }
 
     50% {
-      background: image-url('#{$neko-name}/yawn.gif');
+      background-image: image-url('#{$neko-name}/yawn.gif');
     }
 
     100% {
-      background: image-url('#{$neko-name}/still.gif');
+      background-image: image-url('#{$neko-name}/still.gif');
     }
   }
 
   @keyframes neko-#{$neko-name}-still {
     0% {
-      background: image-url('#{$neko-name}/still.gif');
+      background-image: image-url('#{$neko-name}/still.gif');
     }
 
     50% {
-      background: image-url('#{$neko-name}/still.gif');
+      background-image: image-url('#{$neko-name}/still.gif');
     }
 
     100% {
-      background: image-url('#{$neko-name}/still.gif');
+      background-image: image-url('#{$neko-name}/still.gif');
+    }
+  }
+}
+
+main {
+  position: relative;
+  box-shadow: 0 -10px 30px rgba(#000, 0.4) inset, 0 10px 20px rgba(#000, 0.2);
+  width: 250px;
+  background: radial-gradient(400px at 50% 30%, #FFF, #CCC);
+  height: 300px;
+  border-radius: 50%;
+
+  div {
+    position: absolute;
+    top: 180px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  button {
+    width: 30px;
+    height: 30px;
+    font-size: 0;
+    border-radius: 50%;
+    border: none;
+    position: absolute;
+    background: radial-gradient(20px at 50% 30%, #FFF, #CCC);
+    box-shadow: 0 3px 10px rgba(#000, 0.5);
+
+    &:first-letter {
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 10px;
+    }
+
+    &:nth-of-type(1) {
+      bottom: 90px;
+      left: 40px;
+    }
+
+    &:nth-of-type(2) {
+      bottom: 60px;
+      left: 70px;
+    }
+
+    &:nth-of-type(3) {
+      bottom: 45px;
+      right: 110px;
+    }
+
+    &:nth-of-type(4) {
+      bottom: 60px;
+      right: 70px;
+    }
+
+    &:nth-of-type(5) {
+      bottom: 90px;
+      right: 40px;
     }
   }
 }
